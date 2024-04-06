@@ -134,6 +134,7 @@ class AttnLabelConverter(object):
             text = list(t)
             text.append('[s]')
             text = [self.dict[char] for char in text]
+            # text = [self.dict[char] if char in self.dict else self.dict['[UNK]'] for char in text]
             batch_text[i][1:1 + len(text)] = torch.LongTensor(text)  # batch_text[:, 0] = [GO] token
         return (batch_text.to(device), torch.IntTensor(length).to(device))
 
